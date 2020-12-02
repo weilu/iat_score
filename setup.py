@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='iat-score',
+    name='iat_score',
     version='0.1.0',
     author='Wei Lu',
     author_email='luwei.here@gmail.com',
-    packages=['iat-score', 'iat-score.test'],
+    packages=['iat_score', 'iat_score.test'],
     # scripts=['bin/script1','bin/script2'],
     # url='http://pypi.python.org/pypi/PackageName/',
     license='MIT',

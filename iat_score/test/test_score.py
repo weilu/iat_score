@@ -1,7 +1,7 @@
 import json
 import os.path as path
 import unittest
-from score import Scorer
+from iat_score.score import Scorer
 
 class TestScore(unittest.TestCase):
 

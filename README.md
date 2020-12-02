@@ -1,11 +1,11 @@
-# iat-score
+# iat_score
 
 Compute IAT score & provide human readable feedback based on the score
 
 ## Installation
 
 ```
-pip install iat-score
+pip install iat_score
 ```
 
 ## Usage

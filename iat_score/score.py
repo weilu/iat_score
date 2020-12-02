@@ -3,11 +3,10 @@ import gettext
 import os.path as path
 
 localedir = path.join(path.abspath(path.dirname(__file__)), 'locale')
-translate = gettext.translation('iat-score', localedir, fallback=True)
+translate = gettext.translation('messages', localedir, fallback=True)
 _ = translate.gettext
 
-# TODO: remove asserts
-# TODO: allow specifying column names & trial numbers per round
+# TODO: allow specifying column names & rounds & trial numbers per round
 
 class Scorer():
     def __init__(self, default_left_main, default_right_main,
@@ -19,7 +18,8 @@ class Scorer():
 
 
     def score(self, data):
-        assert(len(data) == 7)
+        if len(data) != 7:
+            raise ValueError('There were not enough rounds to determine a result.')
 
         dfs = []
         for block in data:
@@ -30,7 +30,8 @@ class Scorer():
         df = df[df.correct_side == df.pressed_side]
 
         num_trials = df.shape[0]
-        assert(num_trials == 180) # 20 + 20 + 20 + 40 + 20 + 20 + 40
+        if num_trials < 180: # 20 + 20 + 20 + 40 + 20 + 20 + 40
+            raise ValueError('There were not enough trials to determine a result.')
 
         # Compute D score as describe here:
         # http://faculty.washington.edu/agg/IATmaterials/Summary%20of%20Improved%20Scoring%20Algorithm.pdf
@@ -71,10 +72,12 @@ class Scorer():
 
     def feedback(self, d1_score):
         association = _('automatic association of ')
+        w = _("with")
+        n = _("and")
         if d1_score > 0:
-            association += f'{self.default_left_main} {_("with")} {self.default_left_sub} {_("and")} {self.default_right_main} {_("with")} {self.default_right_sub}'
+            association += f'{self.default_left_main} {w} {self.default_left_sub} {n} {self.default_right_main} {w} {self.default_right_sub}'
         else:
-            association += f'{self.default_left_main} {_("with")} {self.default_right_sub} {_("and")} {self.default_right_main} {_("with")} {self.default_left_sub}'
+            association += f'{self.default_left_main} {w} {self.default_right_sub} {n} {self.default_right_main} {w} {self.default_left_sub}'
 
         abs_d1 = abs(d1_score)
         if abs_d1 <= 0.15:
@@ -86,5 +89,10 @@ class Scorer():
         else:
             degree = _('a strong')
 
-        return f'{_("Your data suggest")} {degree} {association}'
+        data_suggest = _("Your data suggest")
+        return f'{data_suggest} {degree} {association}'
 
+
+if __name__=='__main__':
+    scorer = Scorer('Masculino', 'Femenino', 'Familia', 'Carrera')
+    print(scorer.feedback(2))
