@@ -19,7 +19,7 @@ class Scorer():
 
     def score(self, data):
         if len(data) != 7:
-            raise ValueError('There were not enough rounds to determine a result.')
+            raise ValueError(_('There were not enough rounds to determine a result.'))
 
         dfs = []
         for block in data:
@@ -31,7 +31,7 @@ class Scorer():
 
         num_trials = df.shape[0]
         if num_trials < 180: # 20 + 20 + 20 + 40 + 20 + 20 + 40
-            raise ValueError('There were not enough trials to determine a result.')
+            raise ValueError(_('There were not enough trials to determine a result.'))
 
         # Compute D score as describe here:
         # http://faculty.washington.edu/agg/IATmaterials/Summary%20of%20Improved%20Scoring%20Algorithm.pdf
@@ -42,7 +42,7 @@ class Scorer():
         # Step 2
         num_trials_too_fast = df[df.elapsed_time < 300].shape[0]
         if num_trials_too_fast / num_trials > 0.1:
-            raise ValueError('There were too many fast trials to determine a result.')
+            raise ValueError(_('There were too many fast trials to determine a result.'))
 
         # Step 3
         sd3n6 = df[df.index.isin([3, 6], level=0)][['elapsed_time']].std()

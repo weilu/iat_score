@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: iat-score 0.1.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-12-02 16:08-0500\n"
+"POT-Creation-Date: 2020-12-02 17:31-0500\n"
 "PO-Revision-Date: 2020-12-02 16:19-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,35 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: iat-score/score.py:73
+#: iat_score/score.py:22
+msgid "There were not enough rounds to determine a result."
+msgstr "No hubo suficientes rondas para determinar un resultado."
+
+#: iat_score/score.py:34
+msgid "There were not enough trials to determine a result."
+msgstr "No hubo suficientes ensayos para determinar un resultado."
+
+#: iat_score/score.py:45
+msgid "There were too many fast trials to determine a result."
+msgstr "Hubo demasiados ensayos rápidos para determinar un resultado."
+
+#: iat_score/score.py:74
 msgid "automatic association of "
 msgstr "asociación automática de"
 
-#: iat-score/score.py:74
+#: iat_score/score.py:75
 msgid "with"
 msgstr "con"
 
-#: iat-score/score.py:75
+#: iat_score/score.py:76
 msgid "and"
 msgstr "y"
 
-#: iat-score/score.py:83
+#: iat_score/score.py:84
 msgid "little to no"
 msgstr "poca o ninguna"
 
-#: iat-score/score.py:85
+#: iat_score/score.py:86
 msgid "a slight"
 msgstr "una leve"
 
-#: iat-score/score.py:87
+#: iat_score/score.py:88
 msgid "a moderate"
 msgstr "una moderada"
 
-#: iat-score/score.py:89
+#: iat_score/score.py:90
 msgid "a strong"
 msgstr "una alta"
 
-#: iat-score/score.py:91
+#: iat_score/score.py:92
 msgid "Your data suggest"
 msgstr "Sus datos sugieren"
 
