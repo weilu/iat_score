@@ -1,4 +1,10 @@
 import pandas as pd
+import gettext
+import os.path as path
+
+localedir = path.join(path.abspath(path.dirname(__file__)), 'locale')
+translate = gettext.translation('iat-score', localedir, fallback=True)
+_ = translate.gettext
 
 # TODO: remove asserts
 # TODO: allow specifying column names & trial numbers per round
@@ -64,21 +70,21 @@ class Scorer():
 
 
     def feedback(self, d1_score):
-        association = 'automatic association of '
+        association = _('automatic association of ')
         if d1_score > 0:
-            association += f'{self.default_left_main} with {self.default_left_sub} and {self.default_right_main} with {self.default_right_sub}'
+            association += f'{self.default_left_main} {_("with")} {self.default_left_sub} {_("and")} {self.default_right_main} {_("with")} {self.default_right_sub}'
         else:
-            association += f'{self.default_left_main} with {self.default_right_sub} and {self.default_right_main} with {self.default_left_sub}'
+            association += f'{self.default_left_main} {_("with")} {self.default_right_sub} {_("and")} {self.default_right_main} {_("with")} {self.default_left_sub}'
 
         abs_d1 = abs(d1_score)
         if abs_d1 <= 0.15:
-            degree = 'little to no'
+            degree = _('little to no')
         elif abs_d1 > 0.15 and abs_d1 <= 0.35:
-            degree = 'a slight'
+            degree = _('a slight')
         elif abs_d1 > 0.35 and abs_d1 <= 0.65:
-            degree = 'a moderate'
+            degree = _('a moderate')
         else:
-            degree = 'a strong'
+            degree = _('a strong')
 
-        return f'your data suggest {degree} {association}'
+        return f'{_("Your data suggest")} {degree} {association}'
 
