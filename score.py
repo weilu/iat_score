@@ -63,3 +63,22 @@ class Scorer():
         return d1.to_list()[0]
 
 
+    def feedback(self, d1_score):
+        association = 'automatic association of '
+        if d1_score > 0:
+            association += f'{self.default_left_main} with {self.default_left_sub} and {self.default_right_main} with {self.default_right_sub}'
+        else:
+            association += f'{self.default_left_main} with {self.default_right_sub} and {self.default_right_main} with {self.default_left_sub}'
+
+        abs_d1 = abs(d1_score)
+        if abs_d1 <= 0.15:
+            degree = 'little to no'
+        elif abs_d1 > 0.15 and abs_d1 <= 0.35:
+            degree = 'a slight'
+        elif abs_d1 > 0.35 and abs_d1 <= 0.65:
+            degree = 'a moderate'
+        else:
+            degree = 'a strong'
+
+        return f'your data suggest {degree} {association}'
+
