@@ -1,15 +1,18 @@
 import json
 import unittest
-from score import score
+from score import Scorer
 
 class TestScore(unittest.TestCase):
+
+    def setUp(self):
+        self.scorer = Scorer('Masculino', 'Femenino', 'Familia', 'Carrera')
 
     def test_score(self):
         data = None
         with open('iat.json') as f:
             data = json.load(f)
 
-        d1 = score(data, 'Masculino')
+        d1 = self.scorer.score(data)
 
         self.assertTrue(d1 <= 2)
         self.assertTrue(d1 >= -2)
