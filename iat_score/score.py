@@ -3,6 +3,7 @@ import gettext
 import os.path as path
 
 localedir = path.join(path.abspath(path.dirname(__file__)), 'locale')
+print(localedir)
 translate = gettext.translation('iat_score', localedir, fallback=False, languages=['es'])
 _ = translate.gettext
 
