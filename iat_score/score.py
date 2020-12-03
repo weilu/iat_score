@@ -3,7 +3,7 @@ import gettext
 import os.path as path
 
 localedir = path.join(path.abspath(path.dirname(__file__)), 'locale')
-translate = gettext.translation('iat_score', localedir, fallback=False)
+translate = gettext.translation('iat_score', localedir, fallback=False, languages=['es'])
 _ = translate.gettext
 
 # TODO: allow specifying column names & rounds & trial numbers per round
