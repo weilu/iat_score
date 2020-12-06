@@ -68,7 +68,8 @@ class Scorer():
 
         # Step 7
         d1 = (d1a + d1b) / 2
-        if df.loc[1].loc[0, 'left_main_category'] != self.default_left_main:
+        left_main_cat = df.loc[1]['left_main_category'].to_list()[0]
+        if left_main_cat != self.default_left_main:
             d1 = -d1
 
         return d1.to_list()[0]
