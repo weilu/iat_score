@@ -1,6 +1,7 @@
 import json
 import os.path as path
 import unittest
+from glob import glob
 from iat_score.score import Scorer
 
 class TestScore(unittest.TestCase):
@@ -9,15 +10,15 @@ class TestScore(unittest.TestCase):
         self.scorer = Scorer('Masculino', 'Femenino', 'Familia', 'Carrera')
 
     def test_score(self):
-        data = None
-        test_data = path.join(path.abspath(path.dirname(__file__)), 'iat.json')
-        with open(test_data) as f:
-            data = json.load(f)
+        for test_data in glob(path.abspath(path.dirname(__file__)) + '/*.json'):
+            with open(test_data) as f:
+                print(f'testing against {test_data}')
+                data = json.load(f)
 
-        d1 = self.scorer.score(data)
+            d1 = self.scorer.score(data)
 
-        self.assertTrue(d1 <= 2)
-        self.assertTrue(d1 >= -2)
+            self.assertTrue(d1 <= 2)
+            self.assertTrue(d1 >= -2)
 
     def test_feedback(self):
         self.assertTrue('little to no' in self.scorer.feedback(0))
