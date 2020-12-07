@@ -18,10 +18,6 @@ class Scorer():
 
 
     def score(self, data):
-        # TODO: remove hotpatch after fixing data issue
-        if len(data) > 7:
-            data = data[0:7]
-
         if len(data) != 7:
             raise ValueError(_('There were not enough rounds to determine a result.'))
 
